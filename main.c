@@ -42,6 +42,10 @@ int main()
      int identifiant;
      int freq[200];
      int compteur;
+     int nb_destinations = 0;
+     char destinations_uniques[200][20];
+         int max_freq = 0;
+    int indice_max = 0;
 
 
     //Menu
@@ -171,10 +175,48 @@ int main()
             printf("Client n'existe pas");
             break;
         }
+        for (j = 0; j < client[i].nombre_de_voyages; j++)
+    {
+        int existe = 0;
+
+        // Vérifier si la destination existe déjà
+        for (k = 0; k < nb_destinations; k++)
+        {
+            if (strcmp(destinations_uniques[k], client[i].voy[j].destination) == 0)
+            {
+                freq[k]++;
+                existe = 1;
+                break;
+            }
+        }
+
+        // Si elle n'existe pas → l’ajouter
+        if (!existe)
+        {
+            strcpy(destinations_uniques[nb_destinations], client[i].voy[j].destination);
+            freq[nb_destinations] = 1;
+            nb_destinations++;
+        }
+    }
+
+
+
+    for (k = 0; k < nb_destinations; k++)
+    {
+        if (freq[k] > max_freq)
+        {
+            max_freq = freq[k];
+            indice_max = k;
+        }
+    }
+
+    printf("La destination la plus demandée pour ce voyageur est : %s (%d fois)\n",
+           destinations_uniques[indice_max], max_freq);
+}
 
         break;
     }
-}
     while(choix!=0);
     return 0;
 }
+
