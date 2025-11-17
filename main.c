@@ -74,10 +74,11 @@ int main()
                 printf("Entrez l'identifiant\n");
                 scanf("%d",&client[i].id);
                 printf("Entrez son nom\n");
-                fflush(stdin);
+                getchar(stdin);
                 gets(client[i].nom);
                 printf("Entrez son prenom\n");
-                scanf("%s", client[i].prenom);
+                getchar(stdin);
+                gets(client[i].prenom);
                 printf("Entrez le nombre de voyages\n");
                 scanf("%d",&client[i].nombre_de_voyages);
                 for (j=0;j<client[i].nombre_de_voyages;j++)
@@ -219,4 +220,5 @@ int main()
     while(choix!=0);
     return 0;
 }
+
 
